@@ -1,0 +1,34 @@
+[
+  {
+    "id": "028b4e0ddca44d6ba0dd97aa954bead7",
+    "name": "Cluster A"
+  },
+  {
+    "id": "8d6fe4cf282f47ee997e7e7a553ac8a9",
+    "name": "Cluster B"
+  },
+  {
+    "id": "e434c5bd0b6a4c1c822919c42b4a0fa6",
+    "name": "Cluster C"
+  },
+  {
+    "id": "7938ee7843b3480ca370dfaad64d597c",
+    "name": "Cluster D"
+  },
+  {
+    "id": "927ad5057f2946b789747962fb0881b9",
+    "name": "Cluster E"
+  },
+  {
+    "id": "b8003cf0cce94e48a83ec84e16312638",
+    "name": "Cluster F"
+  },
+  {
+    "id": "48101bb0463d4bb6a7e65ec4a9a573db",
+    "name": "Cluster G"
+  },
+  {
+    "id": "90477b9885824acaa3994b2e5c2f96b2",
+    "name": "Cluster H"
+  }
+]
