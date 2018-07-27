@@ -1,33 +1,58 @@
 import React, { Component } from 'react';
+import data from '../data/clusters.json'
 
 export default class SearchBar extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { query: '' };
+		this.state = {
+			query: '',
+			results: data,
+			queryResults: [],
+			cleanResults: []
+		};
 	}
 
 	componentWillMount() {
-    fetch('https://api.github.com/gists/ec791a5c4cc6507f7c814b24a5ac750b')
-      .then(results => {
-        return results.json();
-      })
-      .then(data => {
-        console.log(data.files['clusters.json'].content);
-      });
-  }
+		console.log("data --->", data);
+
+		let cleanResults = data.map(item => {
+			return ({ id: item.id, name: item.name.toLowerCase() })
+		});
+
+		this.setState({
+			cleanResults: cleanResults
+		});
+	}
 
 	handleChange = (event) => {
 		const searchQuery = event.target.value;
-		this.setState({query: event.target.value});
-		console.log(searchQuery);
+		this.setState({ query: event.target.value });
+
+		if (searchQuery.length > 2) {
+			this.filterSearchResults(searchQuery);
+		}
+	}
+
+	filterSearchResults = (query) => {
+		let cleanResults = this.state.cleanResults;
+		let cleanQuery = query.toLowerCase();
+
+		for (let i = 0; i < cleanResults.length; i++) {
+			if (this.state.cleanResults[i].name.indexOf(cleanQuery) > -1) {
+				console.log("we found it!");
+			}
+			else {
+				console.log("not there!");
+			}
+		}
 	}
 
 	render() {
 		return (
 			<div>
-				<input 
-					type="text" 
-					placeholder="search" 
+				<input
+					type="text"
+					placeholder="search"
 					value={this.state.query}
 					onChange={this.handleChange} />
 			</div>
