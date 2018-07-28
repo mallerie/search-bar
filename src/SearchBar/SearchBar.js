@@ -6,21 +6,19 @@ export default class SearchBar extends Component {
 		super(props);
 		this.state = {
 			query: '',
-			results: data,
+			data: data,
 			queryResults: [],
-			cleanResults: []
+			lowercaseData: []
 		};
 	}
 
 	componentWillMount() {
-		console.log("data --->", data);
-
-		let cleanResults = data.map(item => {
+		let lowercaseData = data.map(item => {
 			return ({ id: item.id, name: item.name.toLowerCase() })
 		});
 
 		this.setState({
-			cleanResults: cleanResults
+			lowercaseData: lowercaseData
 		});
 	}
 
@@ -34,11 +32,11 @@ export default class SearchBar extends Component {
 	}
 
 	filterSearchResults = (query) => {
-		let cleanResults = this.state.cleanResults;
+		let lowercaseData = this.state.lowercaseData;
 		let cleanQuery = query.toLowerCase();
 
-		for (let i = 0; i < cleanResults.length; i++) {
-			if (this.state.cleanResults[i].name.indexOf(cleanQuery) > -1) {
+		for (let i = lowercaseData.length; i--;) {
+			if (this.state.lowercaseData[i].name.indexOf(cleanQuery) > -1) {
 				console.log("we found it!");
 			}
 			else {
