@@ -4,6 +4,7 @@ import data from '../data/clusters.json'
 export default class SearchBar extends Component {
 	constructor(props) {
 		super(props);
+		
 		this.state = {
 			query: '',
 			data: data,
@@ -23,24 +24,27 @@ export default class SearchBar extends Component {
 	}
 
 	handleChange = (event) => {
-		const searchQuery = event.target.value;
+		const query = event.target.value;
 		this.setState({ query: event.target.value });
 
-		if (searchQuery.length > 2) {
-			this.filterSearchResults(searchQuery);
-		}
+		// if (searchQuery.length > 2) {
+			this.searchData(query);
+		// }
 	}
 
-	filterSearchResults = (query) => {
+	searchData = (query) => {
 		let lowercaseData = this.state.lowercaseData;
 		let cleanQuery = query.toLowerCase();
+		let queryResults = [];
 
 		for (let i = lowercaseData.length; i--;) {
-			if (this.state.lowercaseData[i].name.indexOf(cleanQuery) > -1) {
-				console.log("we found it!");
+			if (this.state.lowercaseData[i].name.indexOf(cleanQuery) !== -1) {
+				queryResults.push(this.state.data[i]);
+				this.setState({queryResults: queryResults});
 			}
 			else {
-				console.log("not there!");
+				//If user changes query, remove item from array
+	
 			}
 		}
 	}
