@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 export default class SearchBar extends Component {
 	handleChange = (event) => {
-    this.props.onChange(event);
-  };
+		this.props.onChange(event);
+	};
 
 	render() {
 		return (
@@ -12,7 +12,7 @@ export default class SearchBar extends Component {
 				<input
 					type="text"
 					placeholder={"Search by cluster id or name ..."}
-					value={this.props.query}
+					ref={this.props.query}
 					onChange={this.handleChange} />
 			</div>
 		);
