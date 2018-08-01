@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Display from '../Display/Display';
 
 export default class Dropdown extends Component {
   constructor(props) {
@@ -15,28 +14,18 @@ export default class Dropdown extends Component {
     return shortId
   }
 
-  handleSelectResult = (item) => {
-    this.setState({
-      showSelectedResult: true,
-      result: item
-    });
+  handleSelectResult = (index) => {
+    this.props.handleClick(index);
   }
 
   render() {
-    let { showSelectedResult, result } = this.state;
     return (
       <div>
         <ul className="dropdown">
-          {this.props.list.map(listItem => {
-            return <li onClick={() => this.handleSelectResult(listItem)} key={listItem.id}>{listItem.name}({this.shortenId(listItem.id)})</li>
+          {this.props.list.map((listItem, index) => {
+            return <li onClick={() => this.handleSelectResult(index)} key={listItem.id}>{listItem.name}({this.shortenId(listItem.id)})</li>
           })}
         </ul>
-        {showSelectedResult &&
-          <Display
-            title={"Selected Cluster"}
-            name={result.name}
-            id={result.id}
-          />}
       </div>
     );
   }
