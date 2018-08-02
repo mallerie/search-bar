@@ -9,13 +9,13 @@ export default class Dropdown extends Component {
     };
   }
 
+  handleSelectResult = (index) => {
+    this.props.handleClick(index);
+  }
+
   shortenId = (id) => {
     let shortId = id.slice(0, 6);
     return shortId
-  }
-
-  handleSelectResult = (index) => {
-    this.props.handleClick(index);
   }
 
   render() {
@@ -23,7 +23,9 @@ export default class Dropdown extends Component {
       <div className="dropdown">
         <ul>
           {this.props.list.map((listItem, index) => {
-            return <li onClick={() => this.handleSelectResult(index)} key={listItem.id}>{listItem.name}({this.shortenId(listItem.id)})</li>
+            return <li onClick={() => this.handleSelectResult(index)} 
+                       key={listItem.id}>{listItem.name}({this.shortenId(listItem.id)})
+                   </li>
           })}
         </ul>
       </div>

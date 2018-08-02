@@ -26,44 +26,9 @@ export default class App extends Component {
       items: data,
       showDisplay: null,
       showDropdown: null
-    })
+    });
 
     this.query.value = "";
-
-  }
-
-  searchData = (query) => {
-    let lowercaseData = data.map(item => {
-        return ({ id: item.id, name: item.name.toLowerCase() })
-    });
-    let queryResults = [];
-    let emptyArray = [];
-  
-    for (let i = 0; i < lowercaseData.length; i++) {
-     if (lowercaseData[i].name.indexOf(query.toLowerCase()) !== -1 || lowercaseData[i].id.indexOf(query.toLowerCase()) !== -1) {
-      queryResults.push(data[i]);
-     }
-    }
-  
-    //Return empty array if there is 
-    //no query
-    if (!query) {
-     queryResults = emptyArray;
-    }
-  
-    return queryResults;
-  }
-
-  handleInputClear = () => {
-   this.query.value = "test!"
-    console.log('query :', this.query.value);
-  }
-  
-  handleQueryChange = (event) => {    
-    this.setState({
-      filteredList: searchData(event.target.value),
-      showDropdown: true
-    });
   }
 
   handleClick = (selectedIndex) => {
@@ -74,8 +39,37 @@ export default class App extends Component {
      });
   }
 
+  handleQueryChange = (event) => {    
+    this.setState({
+      filteredList: searchData(event.target.value),
+      showDropdown: true
+    });
+  }
+
+  searchData = (query) => {
+    let emptyArray = [];
+    let lowercaseData = data.map(item => {
+        return ({ id: item.id, name: item.name.toLowerCase() })
+    });
+    let queryResults = [];
+  
+    for (let i = 0; i < lowercaseData.length; i++) {
+     if (lowercaseData[i].name.indexOf(query.toLowerCase()) !== -1 || lowercaseData[i].id.indexOf(query.toLowerCase()) !== -1) {
+      queryResults.push(data[i]);
+     }
+    }
+  
+    //Return empty array if there is no query
+    if (!query) {
+     queryResults = emptyArray;
+    }
+
+    return queryResults;
+  }
+  
   render() {
     let { showDisplay, selectedIndex, filteredList, showDropdown } = this.state;
+    
     return (
       <div className="app">
         <SearchBar 
