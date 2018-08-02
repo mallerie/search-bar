@@ -8,7 +8,8 @@ export default class SearchBar extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="search-bar">
+				<span className="fa fa-search" />
 				<input
 					type="text"
 					placeholder={"Search by cluster id or name ..."}
