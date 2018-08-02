@@ -24,7 +24,8 @@ export default class App extends Component {
       selectedIndex: [],
       filteredList: [],
       items: data,
-      showDisplay: null
+      showDisplay: null,
+      showDropdown: null
     })
 
     this.query.value = "";
@@ -60,24 +61,35 @@ export default class App extends Component {
   
   handleQueryChange = (event) => {    
     this.setState({
-      filteredList: searchData(event.target.value)
+      filteredList: searchData(event.target.value),
+      showDropdown: true
     });
   }
 
   handleClick = (selectedIndex) => {
     this.setState({ 
       selectedIndex,
-      showDisplay: true
+      showDisplay: true,
+      showDropdown: false
      });
   }
 
   render() {
-    let { showDisplay } = this.state;
+    let { showDisplay, selectedIndex, filteredList, showDropdown } = this.state;
     return (
-      <div className="App">
-        <SearchBar query={input => this.query = input} onChange={this.handleQueryChange} onClear={this.handleInputClear} /> 
-        <Dropdown handleClick={this.handleClick} list={this.state.filteredList} />
-        {showDisplay && <Display title={"Selected Result"} onClick={this.handleClearApp} result={this.state.filteredList[this.state.selectedIndex]}/>}
+      <div className="app">
+        <SearchBar 
+          query={input => this.query = input} 
+          onChange={this.handleQueryChange} 
+          onClear={this.handleInputClear} /> 
+        {showDropdown && <Dropdown 
+          handleClick={this.handleClick} 
+          list={this.state.filteredList} />}
+        {showDisplay && 
+        <Display 
+          title={"Selected Cluster"} 
+          onClick={this.handleClearApp} 
+          result={filteredList[selectedIndex]}/>}
       </div>
     );
   }
