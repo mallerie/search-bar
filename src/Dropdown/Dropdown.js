@@ -20,8 +20,8 @@ export default class Dropdown extends Component {
 
   render() {
     return (
-      <div>
-        <ul className="dropdown">
+      <div className="dropdown">
+        <ul>
           {this.props.list.map((listItem, index) => {
             return <li onClick={() => this.handleSelectResult(index)} key={listItem.id}>{listItem.name}({this.shortenId(listItem.id)})</li>
           })}
